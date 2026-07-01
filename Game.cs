@@ -32,8 +32,51 @@ public partial class Game : Node2D
     {
         DisplayServer.WindowSetSize(new Vector2I(ScreenWidth, ScreenHeight));
 
+        EnsureInputActions();
+
         CreateWorld();
         RestartGame();
+    }
+
+    private static void EnsureInputActions()
+    {
+        AddKeyAction("move_left", Key.A, Key.Left);
+        AddKeyAction("move_right", Key.D, Key.Right);
+        AddKeyAction("move_up", Key.W, Key.Up);
+        AddKeyAction("move_down", Key.S, Key.Down);
+        AddKeyAction("restart", Key.R);
+    }
+
+    private static void AddKeyAction(string actionName, params Key[] keys)
+    {
+        if (!InputMap.HasAction(actionName))
+        {
+            InputMap.AddAction(actionName);
+        }
+
+        foreach (Key key in keys)
+        {
+            InputEventKey inputEvent = new()
+            {
+                Keycode = key
+            };
+
+            bool alreadyExists = false;
+
+            foreach (InputEvent existingEvent in InputMap.ActionGetEvents(actionName))
+            {
+                if (existingEvent is InputEventKey existingKey && existingKey.Keycode == key)
+                {
+                    alreadyExists = true;
+                    break;
+                }
+            }
+
+            if (!alreadyExists)
+            {
+                InputMap.ActionAddEvent(actionName, inputEvent);
+            }
+        }
     }
 
     public override void _Process(double delta)
@@ -513,5 +556,3 @@ public partial class Game : Node2D
         }
     }
 }
-
-//OPFER
