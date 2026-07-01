@@ -329,7 +329,8 @@ public partial class Game : Node2D
 
     private void UpdateHud()
     {
-        _hud.Text = $"The Spirit of Noah    Tiere: {_score}/12    Leben: {_lives}    Zeit: {Mathf.CeilToInt(_timeLeft)}    R = Neustart";
+        _hud.Text =
+            $"The Spirit of Noah    Tiere: {_score}/12    Leben: {_lives}    Zeit: {Mathf.CeilToInt(_timeLeft)}    R = Neustart";
     }
 
     private void Win()
@@ -509,7 +510,8 @@ public partial class Game : Node2D
             DrawCircle(new Vector2(-6, -3 + bob), 3, Colors.Black);
             DrawCircle(new Vector2(6, -3 + bob), 3, Colors.Black);
             DrawCircle(new Vector2(0, 6 + bob), 4, new Color(0.12f, 0.06f, 0.03f));
-            DrawString(ThemeDB.FallbackFont, new Vector2(-22, 38 + bob), AnimalName, HorizontalAlignment.Left, 70, 13, Colors.White);
+            DrawString(ThemeDB.FallbackFont, new Vector2(-22, 38 + bob), AnimalName, HorizontalAlignment.Left, 70, 13,
+                Colors.White);
         }
     }
 
