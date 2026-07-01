@@ -12,6 +12,14 @@ public partial class Game : Node2D
     private const float AnimalRadius = 18f;
     private const float DropRadius = 10f;
 
+    private readonly LevelDefinition[] _levels =
+    {
+        new("Die ersten Tiere", 8, 70f, 0.72f, 0.24f, 235, 430, 1),
+        new("Der starke Regen", 10, 62f, 0.58f, 0.19f, 280, 520, 2),
+        new("Die dunkle Flut", 12, 55f, 0.46f, 0.15f, 330, 610, 3),
+        new("Letzte Archefahrt", 14, 48f, 0.36f, 0.11f, 390, 710, 4)
+    };
+
     private readonly Random _random = new();
 
     private NoahPlayer _player = null!;
@@ -23,9 +31,12 @@ public partial class Game : Node2D
     private readonly List<Cloud> _clouds = new();
 
     private int _score;
+    private int _rescuedThisLevel;
     private int _lives;
+    private int _levelIndex;
     private float _timeLeft;
     private float _stormTimer;
+    private float _levelMessageTimer;
     private bool _gameOver;
 
     public override void _Ready()
@@ -95,6 +106,7 @@ public partial class Game : Node2D
             return;
         }
 
+        UpdateLevelMessage(dt);
         MovePlayer(dt);
         UpdateAnimals();
         UpdateStorm(dt);
@@ -160,17 +172,58 @@ public partial class Game : Node2D
         _drops.Clear();
 
         _score = 0;
-        _lives = 3;
-        _timeLeft = 65f;
-        _stormTimer = 0.4f;
+        _lives = 4;
+        _levelIndex = 0;
+
+        StartLevel();
+    }
+
+    private void StartLevel()
+    {
+        foreach (Animal animal in _animals)
+        {
+            animal.QueueFree();
+        }
+
+        foreach (StormDrop drop in _drops)
+        {
+            drop.QueueFree();
+        }
+
+        _animals.Clear();
+        _drops.Clear();
+
+        LevelDefinition level = CurrentLevel;
+
+        _rescuedThisLevel = 0;
+        _timeLeft = level.TimeLimit;
+        _stormTimer = 1f;
         _gameOver = false;
 
         _player.Position = new Vector2(ScreenWidth / 2f, ScreenHeight / 2f);
         _player.Visible = true;
-        _centerMessage.Text = "";
+        _centerMessage.Text = $"LEVEL {_levelIndex + 1}: {level.Name}";
+        _levelMessageTimer = 1.6f;
 
         CreateAnimals();
         UpdateHud();
+    }
+
+    private LevelDefinition CurrentLevel => _levels[_levelIndex];
+
+    private void UpdateLevelMessage(float dt)
+    {
+        if (_levelMessageTimer <= 0f)
+        {
+            return;
+        }
+
+        _levelMessageTimer -= dt;
+
+        if (_levelMessageTimer <= 0f)
+        {
+            _centerMessage.Text = "";
+        }
     }
 
     private void CreateAnimals()
@@ -188,14 +241,16 @@ public partial class Game : Node2D
             "Bär",
             "Ziege",
             "Eule",
-            "Affe"
+            "Affe",
+            "Kamel",
+            "Reh"
         };
 
-        for (int i = 0; i < names.Length; i++)
+        for (int i = 0; i < CurrentLevel.AnimalCount; i++)
         {
             Animal animal = new()
             {
-                AnimalName = names[i],
+                AnimalName = names[i % names.Length],
                 Position = new Vector2(
                     _random.Next(70, ScreenWidth - 70),
                     _random.Next(115, ScreenHeight - 80)
@@ -253,6 +308,7 @@ public partial class Game : Node2D
             if (_player.Position.DistanceTo(animal.Position) <= PlayerRadius + AnimalRadius + 4)
             {
                 _score++;
+                _rescuedThisLevel++;
                 _animals.RemoveAt(i);
                 animal.QueueFree();
             }
@@ -260,7 +316,7 @@ public partial class Game : Node2D
 
         if (_animals.Count == 0)
         {
-            Win();
+            CompleteLevel();
         }
     }
 
@@ -270,8 +326,9 @@ public partial class Game : Node2D
 
         if (_stormTimer <= 0f)
         {
-            float difficulty = 1f - _timeLeft / 65f;
-            _stormTimer = Mathf.Lerp(0.65f, 0.17f, difficulty);
+            LevelDefinition level = CurrentLevel;
+            float difficulty = 1f - _timeLeft / level.TimeLimit;
+            _stormTimer = Mathf.Lerp(level.MaxStormDelay, level.MinStormDelay, difficulty);
             SpawnDrop();
         }
 
@@ -306,10 +363,11 @@ public partial class Game : Node2D
 
     private void SpawnDrop()
     {
+        LevelDefinition level = CurrentLevel;
         StormDrop drop = new()
         {
             Position = new Vector2(_random.Next(10, ScreenWidth - 10), -25),
-            Speed = _random.Next(260, 520)
+            Speed = _random.Next(level.MinDropSpeed, level.MaxDropSpeed)
         };
 
         _drops.Add(drop);
@@ -329,8 +387,28 @@ public partial class Game : Node2D
 
     private void UpdateHud()
     {
+        LevelDefinition level = CurrentLevel;
         _hud.Text =
-            $"The Spirit of Noah    Tiere: {_score}/12    Leben: {_lives}    Zeit: {Mathf.CeilToInt(_timeLeft)}    R = Neustart";
+            $"Level {_levelIndex + 1}/{_levels.Length}: {level.Name}    Tiere: {_rescuedThisLevel}/{level.AnimalCount}    Gesamt: {_score}    Leben: {_lives}    Zeit: {Mathf.CeilToInt(_timeLeft)}    R = Neustart";
+    }
+
+    private void CompleteLevel()
+    {
+        if (_levelIndex >= _levels.Length - 1)
+        {
+            FinalWin();
+            return;
+        }
+
+        _levelIndex++;
+        StartLevel();
+    }
+
+    private void FinalWin()
+    {
+        _gameOver = true;
+        _centerMessage.Text = "GEWONNEN!\nAlle Level sind geschafft und die Tiere sind sicher.\nDruecke R fuer eine neue Runde.";
+        UpdateHud();
     }
 
     private void Win()
@@ -357,7 +435,15 @@ public partial class Game : Node2D
 
     private void DrawSky()
     {
-        DrawRect(new Rect2(Vector2.Zero, new Vector2(ScreenWidth, ScreenHeight)), new Color(0.06f, 0.08f, 0.14f));
+        Color skyColor = CurrentLevel.Sky switch
+        {
+            1 => new Color(0.08f, 0.12f, 0.21f),
+            2 => new Color(0.06f, 0.08f, 0.14f),
+            3 => new Color(0.04f, 0.05f, 0.1f),
+            _ => new Color(0.02f, 0.03f, 0.07f)
+        };
+
+        DrawRect(new Rect2(Vector2.Zero, new Vector2(ScreenWidth, ScreenHeight)), skyColor);
 
         for (int i = 0; i < 70; i++)
         {
@@ -557,4 +643,15 @@ public partial class Game : Node2D
             DrawRect(new Rect2(-5, 0, 65, 18), color);
         }
     }
+
+    private sealed record LevelDefinition(
+        string Name,
+        int AnimalCount,
+        float TimeLimit,
+        float MaxStormDelay,
+        float MinStormDelay,
+        int MinDropSpeed,
+        int MaxDropSpeed,
+        int Sky
+    );
 }
