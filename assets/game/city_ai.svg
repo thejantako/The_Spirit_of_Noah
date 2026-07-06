@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <circle cx="75" cy="75" r="57" fill="#0c2530"/>
+  <circle cx="75" cy="75" r="45" fill="none" stroke="#58f0ff" stroke-width="6"/>
+  <circle cx="75" cy="75" r="15" fill="#58f0ff"/>
+  <path d="M28 97 L55 82 M122 97 L95 82 M75 18 V45" stroke="#58f0ff" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <text x="75" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">CITY-AI</text>
+</svg>
