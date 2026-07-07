@@ -154,25 +154,26 @@ public partial class PlayerController : CharacterBody2D
 		// 1. Richtung flippen (nach links oder rechts schauen)
 		if (inputDirection > 0)
 		{
-			AnimatedSprite.FlipH = false; // Schaut nach rechts
+			AnimatedSprite.FlipH = false;
 		}
 		else if (inputDirection < 0)
 		{
-			AnimatedSprite.FlipH = true;  // Schaut nach links
+			AnimatedSprite.FlipH = true;
 		}
 
-		// 2. Animation je nach Zustand auswählen
+		// 2. Animation je nach ECHTER Bewegung auswählen
 		if (!IsOnFloor())
 		{
-			AnimatedSprite.Play("Jump");
+			AnimatedSprite.Play("jump");
 		}
-		else if (inputDirection != 0)
+		// Mathf.Abs prüft, ob die echte Geschwindigkeit ungleich 0 ist (egal ob links oder rechts)
+		else if (Mathf.Abs(Velocity.X) > 5f) 
 		{
-			AnimatedSprite.Play("Ride");
+			AnimatedSprite.Play("ride");
 		}
 		else
 		{
-			AnimatedSprite.Play("Idle");
+			AnimatedSprite.Play("idle");
 		}
 	}
 }
