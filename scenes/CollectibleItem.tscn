@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cv0yvp2ewkn3x"]
+
+[ext_resource type="Script" uid="uid://cdh176hety8rv" path="res://scripts/Items/CollectibleItem.cs" id="1_uaxfv"]
+[ext_resource type="Script" uid="uid://cq6n7irgx2ngt" path="res://scripts/Items/ItemData.cs" id="2_s1fmu"]
+
+[sub_resource type="Resource" id="Resource_ly28b"]
+script = ExtResource("2_s1fmu")
+metadata/_custom_type_script = "uid://cq6n7irgx2ngt"
+
+[node name="CollectibleItem" type="Node2D" unique_id=1465320248 node_paths=PackedStringArray("Sprite")]
+script = ExtResource("1_uaxfv")
+ItemData = SubResource("Resource_ly28b")
+Sprite = NodePath("Sprite2D")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=300188331]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1492839980]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=887112138]

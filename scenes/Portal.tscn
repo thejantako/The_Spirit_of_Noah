@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bof38eocm0uhx"]
+
+[ext_resource type="Script" uid="uid://cwbhhm8i24tlo" path="res://scripts/Systems/ScenePortal.cs" id="1_fw72y"]
+
+[node name="Portal" type="Node2D" unique_id=19236676]
+script = ExtResource("1_fw72y")
+TargetScenePath = "res://scenes/levels"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=922041342]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=896385486]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1378664475]

@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The Spirit of Noah", "The Spirit of Noah.csproj", "{C32CDDC5-5FC2-425E-AF43-1BEE7C51FFCA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The Spirit of Noah", "The Spirit of Noah.csproj", "{9FA9077A-C2C4-4A2F-9BCD-1EBC872D5216}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C32CDDC5-5FC2-425E-AF43-1BEE7C51FFCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C32CDDC5-5FC2-425E-AF43-1BEE7C51FFCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C32CDDC5-5FC2-425E-AF43-1BEE7C51FFCA}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{C32CDDC5-5FC2-425E-AF43-1BEE7C51FFCA}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{C32CDDC5-5FC2-425E-AF43-1BEE7C51FFCA}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{C32CDDC5-5FC2-425E-AF43-1BEE7C51FFCA}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{9FA9077A-C2C4-4A2F-9BCD-1EBC872D5216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FA9077A-C2C4-4A2F-9BCD-1EBC872D5216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FA9077A-C2C4-4A2F-9BCD-1EBC872D5216}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{9FA9077A-C2C4-4A2F-9BCD-1EBC872D5216}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{9FA9077A-C2C4-4A2F-9BCD-1EBC872D5216}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{9FA9077A-C2C4-4A2F-9BCD-1EBC872D5216}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://v78gdw5dfp4v"]
+
+[ext_resource type="Script" uid="uid://hhsu4s7qfleb" path="res://scripts/Enemies/EnemieBase.cs" id="1_55jtl"]
+[ext_resource type="Script" uid="uid://85c636uag8yi" path="res://scripts/Components/HealthComponents.cs" id="2_mpr68"]
+
+[node name="Enemy" type="Node2D" unique_id=237622643]
+script = ExtResource("1_55jtl")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1544710861]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=256020331]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1631657872]
+
+[node name="HealthComponent" type="Node" parent="." unique_id=604239968]
+script = ExtResource("2_mpr68")

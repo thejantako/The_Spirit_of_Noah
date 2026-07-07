@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://de1snkxks7okn"]
+
+[ext_resource type="Script" uid="uid://cv6c3i66sl884" path="res://scripts/Player/PlayerController.cs" id="1_mdl7e"]
+[ext_resource type="Texture2D" uid="uid://bcla1spgbgwec" path="res://media/Player/t-rex-png-1.png" id="2_6eyey"]
+[ext_resource type="Script" uid="uid://cfbmxft1t5cru" path="res://scripts/Player/PlayerInventory.cs" id="2_qu4a1"]
+[ext_resource type="Script" uid="uid://lsclb760vb1j" path="res://scripts/weapons/WeaponHolder.cs" id="3_70d11"]
+[ext_resource type="Texture2D" uid="uid://8pc78cv5oi50" path="res://media/Player/T-rex-png-2.png" id="3_d3wef"]
+[ext_resource type="Script" uid="uid://85c636uag8yi" path="res://scripts/Components/HealthComponents.cs" id="4_cw2d6"]
+[ext_resource type="Texture2D" uid="uid://c1dlmigex1gl1" path="res://media/Player/T-rex-png-3.png" id="4_o4126"]
+[ext_resource type="Texture2D" uid="uid://c13qjut256s8o" path="res://media/Player/T-rex--png-4.png" id="5_lkdrv"]
+[ext_resource type="Texture2D" uid="uid://cf5b6jrpyjfsf" path="res://media/Player/T-rex--png-5.png" id="6_p7iby"]
+[ext_resource type="Texture2D" uid="uid://ca1s7skagakdc" path="res://media/Player/T-rex--png-6.png" id="7_0rnld"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_srp4u"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6eyey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d3wef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_o4126")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lkdrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p7iby")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0rnld")
+}],
+"loop": true,
+"name": &"Ride",
+"speed": 9.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jfpux"]
+radius = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_61ith"]
+radius = 25.99981
+height = 120.31624
+
+[node name="Player" type="CharacterBody2D" unique_id=73884883 node_paths=PackedStringArray("WeaponHolder", "Inventory")]
+script = ExtResource("1_mdl7e")
+WeaponHolder = NodePath("WeaponHolder")
+Inventory = NodePath("PlayerInventory")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=30582908]
+position = Vector2(7, 3)
+sprite_frames = SubResource("SpriteFrames_srp4u")
+animation = &"Ride"
+autoplay = "Ride"
+frame_progress = 0.46248525
+
+[node name="PlayerInventory" type="Node" parent="." unique_id=831823481]
+script = ExtResource("2_qu4a1")
+
+[node name="WeaponHolder" type="Node2D" parent="." unique_id=1168127182 node_paths=PackedStringArray("Inventory")]
+script = ExtResource("3_70d11")
+Inventory = NodePath("../PlayerInventory")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=32494257]
+script = ExtResource("4_cw2d6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1937252956]
+position = Vector2(-6, 57)
+shape = SubResource("CircleShape2D_jfpux")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1416879262]
+position = Vector2(6, 9)
+rotation = 0.39095375
+shape = SubResource("CapsuleShape2D_61ith")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=715159940]
+position = Vector2(374, 212)
+zoom = Vector2(1.545, 1.545)
+position_smoothing_enabled = true

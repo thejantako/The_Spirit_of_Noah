@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://jlqg6u5ar7uq"]
+
+[ext_resource type="Script" uid="uid://bela5ftoefee4" path="res://scripts/Enemies/BossBase.cs" id="1_6ig5k"]
+[ext_resource type="Script" uid="uid://85c636uag8yi" path="res://scripts/Components/HealthComponents.cs" id="2_gw42l"]
+
+[node name="Boss" type="Node2D" unique_id=1151665898]
+script = ExtResource("1_6ig5k")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1966294352]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1414983816]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493274429]
+
+[node name="HealthComponent" type="Node" parent="." unique_id=164714637]
+script = ExtResource("2_gw42l")
+
+[node name="ProjectileSpawn" type="Node2D" parent="." unique_id=1346948879]
