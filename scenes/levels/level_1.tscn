@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://def7yjjqnuxyj"]
+
+[ext_resource type="PackedScene" uid="uid://de1snkxks7okn" path="res://scenes/Player.tscn" id="1_014kd"]
+[ext_resource type="Texture2D" uid="uid://dp7wxgyygeaye" path="res://media/Level/HIntergrund-night-stars-PNG.png" id="2_rus8k"]
+[ext_resource type="Texture2D" uid="uid://bccxhlv5uy0je" path="res://media/Level/City gebäude png.png" id="3_5xbjy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nkto"]
+size = Vector2(7000, 33.5)
+
+[node name="Level 1" type="Node2D" unique_id=681474756]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=172544405]
+
+[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1073825563]
+texture_repeat = 2
+
+[node name="Sky" type="TextureRect" parent="ParallaxBackground/Sky" unique_id=1123022510]
+offset_left = -200.0
+offset_top = -800.0
+offset_right = 6800.0
+texture = ExtResource("2_rus8k")
+stretch_mode = 1
+
+[node name="City" type="ParallaxLayer" parent="ParallaxBackground" unique_id=199412314]
+
+[node name="City" type="TextureRect" parent="ParallaxBackground/City" unique_id=564184412]
+offset_left = -200.0
+offset_top = -800.0
+offset_right = 6800.0
+texture = ExtResource("3_5xbjy")
+stretch_mode = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1094986522]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=464254315]
+position = Vector2(3300, -17)
+shape = SubResource("RectangleShape2D_4nkto")
+
+[node name="Player" parent="." unique_id=1423042300 instance=ExtResource("1_014kd")]
+texture_filter = 1
+position = Vector2(1.000001, -171)
+scale = Vector2(2.5, 2.5)
+MoveSpeed = 250.0
+JumpVelocity = -620.0

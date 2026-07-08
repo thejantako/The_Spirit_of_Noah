@@ -1,12 +1,19 @@
 [gd_scene format=3 uid="uid://c1hn7xbgsquht"]
 
 [ext_resource type="Script" uid="uid://ct6qi1fn8o66q" path="res://scripts/weapons/Projectile.cs" id="1_dprbf"]
+[ext_resource type="Texture2D" uid="uid://cdg2g7hkrk30q" path="res://media/Weapons/Mini Gun/Effect-patrone.png" id="2_patrone"]
 
-[node name="Projectile" type="Node2D" unique_id=792015718]
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 8.0
+
+[node name="Projectile" type="Area2D" unique_id=2120584617]
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_dprbf")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1702958709]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=50824530]
+texture = ExtResource("2_patrone")
+offset = Vector2(0, -16.555)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=988330593]
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1451929526]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1304152391]
+shape = SubResource("CircleShape2D_1")

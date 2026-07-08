@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://def7yjjqnuxyj"]
 
 [ext_resource type="PackedScene" uid="uid://de1snkxks7okn" path="res://scenes/Player.tscn" id="1_014kd"]
-[ext_resource type="PackedScene" uid="uid://v78gdw5dfp4v" path="res://scenes/Enemy.tscn" id="2_bswci"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bswci"]
 size = Vector2(1152, 49)
@@ -21,6 +20,3 @@ offset_bottom = 242.0
 
 [node name="Player" parent="." unique_id=1423042300 instance=ExtResource("1_014kd")]
 position = Vector2(37, -596)
-
-[node name="Enemy Schwertkämpfer" parent="." unique_id=237622643 instance=ExtResource("2_bswci")]
-position = Vector2(287.2, 129.6)
