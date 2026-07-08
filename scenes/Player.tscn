@@ -7,9 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://8pc78cv5oi50" path="res://media/Player/T-rex-png-2.png" id="3_d3wef"]
 [ext_resource type="Script" uid="uid://85c636uag8yi" path="res://scripts/Components/HealthComponents.cs" id="4_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://c1dlmigex1gl1" path="res://media/Player/T-rex-png-3.png" id="4_o4126"]
+[ext_resource type="Texture2D" uid="uid://d2y70fliyxont" path="res://media/Player/T-rex-png---spring-3png.png" id="5_0rnld"]
 [ext_resource type="Texture2D" uid="uid://c13qjut256s8o" path="res://media/Player/T-rex--png-4.png" id="5_lkdrv"]
 [ext_resource type="Texture2D" uid="uid://cf5b6jrpyjfsf" path="res://media/Player/T-rex--png-5.png" id="6_p7iby"]
+[ext_resource type="Texture2D" uid="uid://bvxv4se68x327" path="res://media/Player/T-rex-png---spring-4-png.png" id="6_srp4u"]
 [ext_resource type="Texture2D" uid="uid://ca1s7skagakdc" path="res://media/Player/T-rex--png-6.png" id="7_0rnld"]
+[ext_resource type="Texture2D" uid="uid://bbog8vwh6vt8o" path="res://media/Player/T-rex-png---spring-1.png" id="7_jfpux"]
+[ext_resource type="Texture2D" uid="uid://c7nugo0wiuboa" path="res://media/Player/T-rex-png---spring-5png.png" id="8_61ith"]
+[ext_resource type="Texture2D" uid="uid://1qefg18tn4nd" path="res://media/Player/T-rex-png---spring-2-png.png" id="9_ebwui"]
+[ext_resource type="Resource" path="res://resources/weapons/MiniGun.tres" id="10_minigun"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_srp4u"]
 animations = [{
@@ -33,10 +39,34 @@ animations = [{
 "name": &"idle",
 "speed": 7.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0rnld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_srp4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_jfpux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_61ith")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_srp4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0rnld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ebwui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ebwui")
+}],
 "loop": true,
 "name": &"jump",
-"speed": 5.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -70,37 +100,45 @@ radius = 25.99981
 height = 120.31624
 
 [node name="Player" type="CharacterBody2D" unique_id=73884883 node_paths=PackedStringArray("WeaponHolder", "Inventory", "AnimatedSprite")]
+position = Vector2(-10.93, 0)
 script = ExtResource("1_mdl7e")
 WeaponHolder = NodePath("WeaponHolder")
 Inventory = NodePath("PlayerInventory")
 AnimatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=30582908]
-position = Vector2(7, 3)
+position = Vector2(10.93, -80)
 sprite_frames = SubResource("SpriteFrames_srp4u")
-animation = &"ride"
+animation = &"jump"
+frame_progress = 0.78612345
+offset = Vector2(13.015, 9.39)
 
 [node name="PlayerInventory" type="Node" parent="." unique_id=831823481]
 script = ExtResource("2_qu4a1")
 
-[node name="WeaponHolder" type="Node2D" parent="." unique_id=1168127182 node_paths=PackedStringArray("Inventory")]
+[node name="WeaponHolder" type="Node2D" parent="." unique_id=1168127182 node_paths=PackedStringArray("Inventory", "WeaponSprite")]
+position = Vector2(26.27, -76.535)
 script = ExtResource("3_70d11")
+EquippedRangedWeapon = ExtResource("10_minigun")
 Inventory = NodePath("../PlayerInventory")
+WeaponSprite = NodePath("WeaponSprite")
+
+[node name="WeaponSprite" type="Sprite2D" parent="WeaponHolder" unique_id=273147332]
 
 [node name="HealthComponent" type="Node" parent="." unique_id=32494257]
 script = ExtResource("4_cw2d6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1937252956]
-position = Vector2(-6, 57)
+position = Vector2(10.93, -16)
 shape = SubResource("CircleShape2D_jfpux")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1416879262]
-position = Vector2(6, 9)
+position = Vector2(24.929998, -66.99999)
 rotation = 0.39095375
 shape = SubResource("CapsuleShape2D_61ith")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=715159940]
-position = Vector2(286, 41)
-zoom = Vector2(2, 2)
+position = Vector2(11.93, -180)
+zoom = Vector2(1.225, 1.225)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0

@@ -38,8 +38,17 @@ public partial class PlayerController : CharacterBody2D
 		MoveAndSlide();
 		
 		UpdateAnimations();
+		UpdateWeaponDirection();
 	}
+	
+	private void UpdateWeaponDirection()
+	{
+		if (WeaponHolder == null)
+			return;
 
+		WeaponHolder.SetFacingDirection(_facingDirection);
+	}
+	
 	private void UpdateTimers(float delta)
 	{
 		if (_dashTimer > 0f)
@@ -134,7 +143,7 @@ public partial class PlayerController : CharacterBody2D
 			WeaponHolder.UseMeleeWeapon(_facingDirection);
 		}
 
-		if (Input.IsActionJustPressed("shoot"))
+		if (Input.IsActionPressed("shoot"))
 		{
 			WeaponHolder.UseRangedWeapon(_facingDirection);
 		}

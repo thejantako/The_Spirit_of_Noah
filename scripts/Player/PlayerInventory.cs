@@ -3,11 +3,22 @@ using System.Collections.Generic;
 
 public partial class PlayerInventory : Node
 {
+    [Export] public string StartingAmmoId { get; set; } = "basic_ammo";
+    [Export] public int StartingAmmoAmount { get; set; } = 9999;
+
     private readonly Dictionary<string, int> _items = new();
     private readonly Dictionary<string, int> _ammo = new();
 
     public MeleeWeaponData EquippedMeleeWeapon { get; private set; }
     public RangedWeaponData EquippedRangedWeapon { get; private set; }
+
+    public override void _Ready()
+    {
+        if (!string.IsNullOrWhiteSpace(StartingAmmoId) && StartingAmmoAmount > 0)
+        {
+            AddAmmo(StartingAmmoId, StartingAmmoAmount);
+        }
+    }
 
     public void AddItem(string itemId, int amount = 1)
     {

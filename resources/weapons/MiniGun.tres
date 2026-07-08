@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="RangedWeaponData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/weapons/RangedWeaponData.cs" id="1_script"]
+[ext_resource type="Texture2D" path="res://media/Weapons/Mini Gun/mini-gun-PNG.png" id="2_texture"]
+[ext_resource type="Texture2D" path="res://media/Weapons/Mini Gun/mini-gun-illustraitor-mir-effect.png" id="3_shoot"]
+[ext_resource type="PackedScene" uid="uid://c1hn7xbgsquht" path="res://scenes/Projectile.tscn" id="4_scene"]
+
+[resource]
+script = ExtResource("1_script")
+WeaponId = "mini_gun"
+DisplayName = "Mini Gun"
+WeaponTexture = ExtResource("2_texture")
+ShootTexture = ExtResource("3_shoot")
+ProjectileScene = ExtResource("4_scene")
+Damage = 2
+Cooldown = 0.15
+AmmoId = "basic_ammo"
+AmmoCost = 1
+ProjectileSpeed = 600.0
