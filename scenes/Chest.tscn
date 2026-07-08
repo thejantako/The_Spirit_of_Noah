@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://1qwgtswt7jjc"]
+
+[ext_resource type="Texture2D" uid="uid://raxqmunt22ai" path="res://media/Chest/Unbenannt.jpg" id="1_cjixx"]
+[ext_resource type="Script" uid="uid://bhhf7tb7c8ifm" path="res://scenes/interact-Chest.gd" id="1_s2tek"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xodl8"]
+size = Vector2(30, 21.25)
+
+[node name="Chest" type="Area2D" unique_id=110787600]
+script = ExtResource("1_s2tek")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=53870507]
+position = Vector2(22, -14)
+scale = Vector2(0.26123595, 0.21621624)
+texture = ExtResource("1_cjixx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1170600368]
+position = Vector2(22, -14.375)
+shape = SubResource("RectangleShape2D_xodl8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
