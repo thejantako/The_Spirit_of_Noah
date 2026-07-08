@@ -1,18 +1,56 @@
 [gd_scene format=3 uid="uid://de1snkxks7okn"]
 
 [ext_resource type="Script" uid="uid://cv6c3i66sl884" path="res://scripts/Player/PlayerController.cs" id="1_mdl7e"]
+[ext_resource type="Texture2D" uid="uid://bbog8vwh6vt8o" path="res://media/Player/T-rex-png---spring-1.png" id="2_0rnld"]
 [ext_resource type="Texture2D" uid="uid://bcla1spgbgwec" path="res://media/Player/t-rex-png-1.png" id="2_6eyey"]
+[ext_resource type="Texture2D" uid="uid://ct6co67k6bhfk" path="res://media/Player/t-rex-1-png.png" id="2_b8lor"]
 [ext_resource type="Script" uid="uid://cfbmxft1t5cru" path="res://scripts/Player/PlayerInventory.cs" id="2_qu4a1"]
+[ext_resource type="Texture2D" uid="uid://dnv335iak5qe" path="res://media/Player/t-rex-2-png.png" id="3_6e537"]
 [ext_resource type="Script" uid="uid://lsclb760vb1j" path="res://scripts/weapons/WeaponHolder.cs" id="3_70d11"]
 [ext_resource type="Texture2D" uid="uid://8pc78cv5oi50" path="res://media/Player/T-rex-png-2.png" id="3_d3wef"]
+[ext_resource type="Texture2D" uid="uid://1qefg18tn4nd" path="res://media/Player/T-rex-png---spring-2-png.png" id="3_srp4u"]
 [ext_resource type="Script" uid="uid://85c636uag8yi" path="res://scripts/Components/HealthComponents.cs" id="4_cw2d6"]
+[ext_resource type="Texture2D" uid="uid://d2y70fliyxont" path="res://media/Player/T-rex-png---spring-3png.png" id="4_jfpux"]
 [ext_resource type="Texture2D" uid="uid://c1dlmigex1gl1" path="res://media/Player/T-rex-png-3.png" id="4_o4126"]
+[ext_resource type="Texture2D" uid="uid://hge8pn4ph0vq" path="res://media/Player/t-rex-3-png.png" id="4_p07f3"]
+[ext_resource type="Texture2D" uid="uid://bvxv4se68x327" path="res://media/Player/T-rex-png---spring-4-png.png" id="5_61ith"]
 [ext_resource type="Texture2D" uid="uid://c13qjut256s8o" path="res://media/Player/T-rex--png-4.png" id="5_lkdrv"]
+[ext_resource type="Texture2D" uid="uid://bkhc1xfes7j16" path="res://media/Player/t-rex-4-png.png" id="5_viqgg"]
+[ext_resource type="Texture2D" uid="uid://c7nugo0wiuboa" path="res://media/Player/T-rex-png---spring-5png.png" id="6_ebwui"]
+[ext_resource type="Texture2D" uid="uid://pqlu828gyt2v" path="res://media/Player/t-rex-5-png.png" id="6_fgkxt"]
 [ext_resource type="Texture2D" uid="uid://cf5b6jrpyjfsf" path="res://media/Player/T-rex--png-5.png" id="6_p7iby"]
 [ext_resource type="Texture2D" uid="uid://ca1s7skagakdc" path="res://media/Player/T-rex--png-6.png" id="7_0rnld"]
+[ext_resource type="Texture2D" uid="uid://delrr6oxf1g4c" path="res://media/Player/t-rex-6-png.png" id="7_xsi7p"]
+[ext_resource type="Texture2D" uid="uid://ccnsw53gxuata" path="res://media/Player/t-rex-7-png.png" id="8_1jpwa"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_srp4u"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b8lor")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6e537")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_p07f3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_viqgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fgkxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xsi7p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_1jpwa")
+}],
+"loop": 0,
+"name": &"damage",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_o4126")
@@ -29,14 +67,44 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_o4126")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 7.0
 }, {
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0rnld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_srp4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jfpux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_61ith")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ebwui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ebwui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_61ith")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jfpux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0rnld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_srp4u")
+}],
+"loop": 0,
 "name": &"jump",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -57,7 +125,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_0rnld")
 }],
-"loop": true,
+"loop": 1,
 "name": &"ride",
 "speed": 9.0
 }]
@@ -76,9 +144,12 @@ Inventory = NodePath("PlayerInventory")
 AnimatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=30582908]
+texture_filter = 1
 position = Vector2(7, 3)
 sprite_frames = SubResource("SpriteFrames_srp4u")
-animation = &"ride"
+animation = &"damage"
+frame = 6
+frame_progress = 1.0
 
 [node name="PlayerInventory" type="Node" parent="." unique_id=831823481]
 script = ExtResource("2_qu4a1")
