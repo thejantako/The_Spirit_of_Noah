@@ -1,16 +1,101 @@
 [gd_scene format=3 uid="uid://v78gdw5dfp4v"]
 
 [ext_resource type="Script" uid="uid://hhsu4s7qfleb" path="res://scripts/Enemies/EnemieBase.cs" id="1_55jtl"]
+[ext_resource type="Texture2D" uid="uid://cxxls1n6jgv6j" path="res://media/Enemy/Enemy Schwertkämpfer/Gegner_01.png" id="2_ly5gv"]
 [ext_resource type="Script" uid="uid://85c636uag8yi" path="res://scripts/Components/HealthComponents.cs" id="2_mpr68"]
+[ext_resource type="Texture2D" uid="uid://bjtmopsb4fgwu" path="res://media/Enemy/Enemy Schwertkämpfer/Gegner_02.png" id="3_82o86"]
+[ext_resource type="Texture2D" uid="uid://cq7kiwc5skw8p" path="res://media/Enemy/Enemy Schwertkämpfer/Gegner_03.png" id="4_1gqeq"]
+[ext_resource type="Texture2D" uid="uid://di74x5y1g8dsa" path="res://media/Enemy/Enemy Schwertkämpfer/Gegner_04.png" id="5_isvm2"]
+[ext_resource type="Texture2D" uid="uid://b3rsrvrx6dio2" path="res://media/Enemy/Enemy Schwertkämpfer/Gegner_05.png" id="6_gr8dl"]
+[ext_resource type="Texture2D" uid="uid://2qj2y8g8okyy" path="res://media/Player/Waffen/Minigun/Effect-patrone (1).png" id="8_axa8o"]
+[ext_resource type="Texture2D" uid="uid://diqb7d8amumge" path="res://media/Player/Waffen/Minigun/images.png" id="9_4iqch"]
 
-[node name="Enemy" type="Node2D" unique_id=237622643]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idooy"]
+size = Vector2(34, 83.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xodl8"]
+radius = 13.0
+height = 38.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sqslc"]
+radius = 5.0
+height = 77.14116
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3304u"]
+radius = 4.2023697
+height = 42.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_idooy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ly5gv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_82o86")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1gqeq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_isvm2")
+}, {
+"duration": 5.0,
+"texture": ExtResource("6_gr8dl")
+}],
+"loop": 1,
+"name": &"death",
+"speed": 6.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xodl8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_axa8o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_4iqch")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy Schwertkämpfer" type="Node2D" unique_id=237622643]
 script = ExtResource("1_55jtl")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1544710861]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=256020331]
+position = Vector2(47, -47)
+shape = SubResource("RectangleShape2D_idooy")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1631657872]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1434645340]
+position = Vector2(68, -46)
+shape = SubResource("CapsuleShape2D_xodl8")
 
-[node name="HealthComponent" type="Node" parent="." unique_id=604239968]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CharacterBody2D" unique_id=836517618]
+position = Vector2(20, -80)
+rotation = -0.24958208
+shape = SubResource("CapsuleShape2D_sqslc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="CharacterBody2D" unique_id=917209589]
+position = Vector2(82, -58)
+rotation = 0.64751714
+shape = SubResource("CapsuleShape2D_3304u")
+
+[node name="Todesanimation" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=70378651]
+position = Vector2(44, -47)
+sprite_frames = SubResource("SpriteFrames_idooy")
+animation = &"death"
+frame_progress = 0.32158142
+
+[node name="HealthComponent" type="Node" parent="CharacterBody2D" unique_id=604239968]
 script = ExtResource("2_mpr68")
+
+[node name="Trefferanimation" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1072927564]
+position = Vector2(56.000008, -46.999996)
+rotation = -1.3439035
+scale = Vector2(0.5072761, 0.65891004)
+sprite_frames = SubResource("SpriteFrames_xodl8")
