@@ -9,10 +9,32 @@ public partial class WeaponHolder : Node2D
 
     [ExportCategory("References")]
     [Export] public PlayerInventory Inventory { get; set; }
+    [Export] public Sprite2D WeaponSprite { get; set; }
 
     private float _meleeCooldownTimer;
     private float _rangedCooldownTimer;
+    private float _flashTimer;
 
+    public override void _Ready()
+    {
+        if (EquippedRangedWeapon != null && WeaponSprite != null)
+        {
+            WeaponSprite.Texture = EquippedRangedWeapon.WeaponTexture;
+        }
+        else if (EquippedMeleeWeapon != null && WeaponSprite != null)
+        {
+            WeaponSprite.Texture = EquippedMeleeWeapon.WeaponTexture;
+        }
+    }
+
+    public void SetFacingDirection(int direction)
+    {
+        if (WeaponSprite == null)
+            return;
+
+        WeaponSprite.Scale = new Vector2(direction, 1f);
+    }
+    
     public override void _Process(double delta)
     {
         float dt = (float)delta;
@@ -26,11 +48,25 @@ public partial class WeaponHolder : Node2D
         {
             _rangedCooldownTimer -= dt;
         }
+
+        if (_flashTimer > 0f)
+        {
+            _flashTimer -= dt;
+            if (_flashTimer <= 0f && EquippedRangedWeapon != null && WeaponSprite != null)
+            {
+                WeaponSprite.Texture = EquippedRangedWeapon.WeaponTexture;
+            }
+        }
     }
 
     public void EquipMeleeWeapon(MeleeWeaponData weapon)
     {
         EquippedMeleeWeapon = weapon;
+
+        if (WeaponSprite != null && weapon != null)
+        {
+            WeaponSprite.Texture = weapon.WeaponTexture;
+        }
 
         if (Inventory != null)
         {
@@ -42,6 +78,11 @@ public partial class WeaponHolder : Node2D
     {
         EquippedRangedWeapon = weapon;
 
+        if (WeaponSprite != null && weapon != null)
+        {
+            WeaponSprite.Texture = weapon.WeaponTexture;
+        }
+
         if (Inventory != null)
         {
             Inventory.EquipRangedWeapon(weapon);
@@ -52,6 +93,11 @@ public partial class WeaponHolder : Node2D
     {
         if (EquippedMeleeWeapon == null)
             return;
+
+        if (WeaponSprite != null)
+        {
+            WeaponSprite.Scale = new Vector2(direction, 1f);
+        }
 
         if (_meleeCooldownTimer > 0f)
             return;
@@ -91,6 +137,16 @@ public partial class WeaponHolder : Node2D
 
         if (!ammoRemoved)
             return;
+
+        if (WeaponSprite != null)
+        {
+            WeaponSprite.Scale = new Vector2(direction, 1f);
+            if (EquippedRangedWeapon.ShootTexture != null)
+            {
+                WeaponSprite.Texture = EquippedRangedWeapon.ShootTexture;
+                _flashTimer = 0.1f;
+            }
+        }
 
         _rangedCooldownTimer = EquippedRangedWeapon.Cooldown;
 
